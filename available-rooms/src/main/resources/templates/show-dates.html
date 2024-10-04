@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>Available Dates for Selected Room</title>
+        <style>
+            #dateTable, #dateTable td{
+                border: 1px solid black;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Available Dates for Selected Room</h1>
+        <form method="post" th:action="@{/submit-date}" th:object="${availableDatesForm}">
+           <table id="dateTable">
+                <tr th:each="date: ${availableDates}">
+                    <td th:text="${date.day}"></td>
+                    <td th:text="${date.date}"></td>
+                    <td><input type="radio" name="availableDatesForm.date" th:field="${availableDatesForm.date}" th:value="${date.date}"></td>
+                </tr>
+            </table>
+            <br />
+            <input type="submit" />
+        </form>
+    </body>
+</html>

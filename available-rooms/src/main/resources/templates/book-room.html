@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Book a Room</title>
+
+</head>
+<body>
+<h1>Search for Available Rooms</h1>
+
+<form method="post" th:action="@{/get-dates}" th:object="${availableRoomsForm}">
+    <table>
+        <tr>
+            <td>Enter Customer name: </td>
+            <td><input type="text" name="availableRoomsForm.customerName" th:field="${availableRoomsForm.customerName}" /></td>
+        </tr>
+        <tr>
+            <td>Enter email:</td>
+            <td><input type="text" name="availableRoomsForm.email" th:field="${availableRoomsForm.email}" /></td>
+        </tr>
+        <tr>
+            <td>Enter phone number:</td>
+            <td><input type="text" name="availableRoomsForm.phoneNumber" th:field="${availableRoomsForm.phoneNumber}" /></td>
+        </tr>
+        <tr th:each="availableRoom: ${availableRooms}">
+            <td th:text="${availableRoom.roomName}"></td>
+            <td><input type="radio" name="selectedTable" th:field="${availableRoomsForm.selectedRoom}" th:value="${availableRoom.roomNumber}"></td>
+        </tr>
+    </table>
+    <input type="submit" />
+</form>
+</body>
+</html>
