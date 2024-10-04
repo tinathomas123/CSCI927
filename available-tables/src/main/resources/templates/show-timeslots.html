@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>Timeslots for Selected Table</title>
+        <style>
+            #timeslotTable, #timeslotTable td{
+                border: 1px solid black;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Available Timeslots for Selected Table</h1>
+        <form method="post" th:action="@{/submit-timeslot}" th:object="${availableTimeslotsForm}">
+           <table id="timeslotTable">
+                <tr th:each="timeslot: ${availableTimeslots}">
+                    <td th:text="${timeslot.day}"></td>
+                    <td th:text="${timeslot.dateTime}"></td>
+                    <td><input type="radio" name="availableTimeslotsForm.dateTime" th:field="${availableTimeslotsForm.dateTime}" th:value="${timeslot.dateTime}"></td>
+                </tr>
+            </table>
+            <br />
+            <input type="submit" />
+        </form>
+    </body>
+</html>
