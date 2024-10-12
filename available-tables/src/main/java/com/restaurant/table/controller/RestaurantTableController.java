@@ -101,12 +101,7 @@ public class RestaurantTableController {
         logger.info("map at submitTimeslot: "+userDetails);
 
         //save booking details to DB
-        CustomerDetails customerDetails=new CustomerDetails();
-        customerDetails.setCustomerName(userDetails.get("customerName"));
-        customerDetails.setEmail(userDetails.get("email"));
-        customerDetails.setPhoneNumber(userDetails.get("phoneNumber"));
-        customerDetails.setSelectedTable(userDetails.get("selectedTable"));
-        customerDetails.setReservedDateTime(userDetails.get("reservedDateTime"));
+        CustomerDetails customerDetails = customerDetailsService.getCustomerDetails(userDetails);
         customerDetailsService.saveCustomerDetails(customerDetails);
 
         model.addAttribute("customerDetails", customerDetails);
@@ -123,21 +118,7 @@ public class RestaurantTableController {
         paymentRequest.setCardExpiryDate(paymentForm.getCardExpiryDate());
         paymentRequest.setCustomerName(paymentForm.getCustomerName());
 
-        ObjectMapper mapper = new ObjectMapper();
-        String jsonString=mapper.writeValueAsString(paymentRequest);
-
-        HttpHeaders header = new HttpHeaders();
-        header.setContentType(MediaType.APPLICATION_JSON);
-
-        HttpEntity<String> entity = new HttpEntity<String>(jsonString,header);
-
-        ResponseEntity<PaymentResponse>
-                responseEntity
-                = new RestTemplate().postForEntity(
-                "http://payment-api-service:7001/authorize-payment",
-                entity, PaymentResponse.class);
-        PaymentResponse response
-                = responseEntity.getBody();
+        PaymentResponse response = restaurantTableService.getPaymentResponse(paymentRequest);
         if(response != null && response.isAuthorized()) {
 
             logger.info("map at authorizePayment: "+userDetails);
@@ -154,4 +135,6 @@ public class RestaurantTableController {
 
         return "payment-error.html";
     }
+
+
 }
