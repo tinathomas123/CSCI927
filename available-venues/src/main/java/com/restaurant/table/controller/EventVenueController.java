@@ -122,21 +122,7 @@ public class EventVenueController {
         paymentRequest.setCardExpiryDate(paymentForm.getCardExpiryDate());
         paymentRequest.setCustomerName(paymentForm.getCustomerName());
 
-        ObjectMapper mapper = new ObjectMapper();
-        String jsonString=mapper.writeValueAsString(paymentRequest);
-
-        HttpHeaders header = new HttpHeaders();
-        header.setContentType(MediaType.APPLICATION_JSON);
-
-        HttpEntity<String> entity = new HttpEntity<String>(jsonString,header);
-
-        ResponseEntity<PaymentResponse>
-                responseEntity
-                = new RestTemplate().postForEntity(
-                "http://payment-api-service:7001/authorize-payment",
-                entity, PaymentResponse.class);
-        PaymentResponse response
-                = responseEntity.getBody();
+        PaymentResponse response = eventVenueService.getPaymentResponse(paymentRequest);
         if(response != null && response.isAuthorized()) {
 
             logger.info("map at authorizePayment: "+userDetails);
