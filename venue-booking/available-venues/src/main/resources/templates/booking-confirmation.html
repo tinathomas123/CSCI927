@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Booking Confirmation</title>
+</head>
+<body>
+  <h1>Booking Confirmation</h1>
+
+  <b>Booking Confirmation ID: </b><span th:text="${customerDetails.bookingConfirmationId}"></span><br />
+  <b>Customer name: </b><span th:text="${customerDetails.customerName}"></span><br />
+  <b>Email ID: </b><span th:text="${customerDetails.email}"></span><br />
+  <b>Phone number: </b><span th:text="${customerDetails.phoneNumber}"></span><br />
+  <b>Booked venue: </b><span th:text="${customerDetails.selectedVenue}"></span><br />
+  <b>Timeslot of booking: </b><span th:text="${customerDetails.bookedDateTime}"></span><br />
+
+</body>
+</html>
