@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Reserve a Table</title>
+
+</head>
+<body>
+<h1>Search for Available Tables</h1>
+
+<form method="post" th:action="@{/get-timeslots}" th:object="${availableTablesForm}">
+    <table>
+        <tr>
+            <td>Enter Customer name: </td>
+            <td><input type="text" name="availableTablesForm.customerName" th:field="${availableTablesForm.customerName}" /></td>
+        </tr>
+        <tr>
+            <td>Enter email:</td>
+            <td><input type="text" name="availableTablesForm.email" th:field="${availableTablesForm.email}" /></td>
+        </tr>
+        <tr>
+            <td>Enter phone number:</td>
+            <td><input type="text" name="availableTablesForm.phoneNumber" th:field="${availableTablesForm.phoneNumber}" /></td>
+        </tr>
+        <tr th:each="availableTable: ${availableTables}">
+            <td th:text="${availableTable.name}"></td>
+            <td><input type="radio" name="selectedTable" th:field="${availableTablesForm.selectedTable}" th:value="${availableTable.id}"></td>
+        </tr>
+    </table>
+    <input type="submit" />
+</form>
+</body>
+</html>
