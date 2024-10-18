@@ -2,7 +2,7 @@ version: "3.7"
 services:
   api_service:
     build:
-      dockerfile: available-rooms/Dockerfile
+      dockerfile: room-booking/available-rooms/Dockerfile
       context: .
     restart: always
     ports:
@@ -41,7 +41,7 @@ services:
 
   dates-api-service:
     build:
-      dockerfile: dates/Dockerfile
+      dockerfile: room-booking/dates/Dockerfile
       context: .
     restart: always
     ports:
@@ -64,7 +64,7 @@ services:
       
   payment-api-service:
     build:
-      dockerfile: payment/Dockerfile
+      dockerfile: room-booking/payment/Dockerfile
       context: .
     restart: always
     ports:
