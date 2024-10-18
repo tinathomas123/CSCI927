@@ -2,7 +2,7 @@ version: "3.7"
 services:
   api_service:
     build:
-      dockerfile: venue-booking/available-venues/Dockerfile
+      dockerfile: available-venues/Dockerfile
       context: .
     restart: always
     ports:
@@ -41,7 +41,7 @@ services:
 
   timeslot-api-service:
     build:
-      dockerfile: venue-booking/timeslot/Dockerfile
+      dockerfile: timeslot/Dockerfile
       context: .
     restart: always
     ports:
@@ -64,7 +64,7 @@ services:
       
   payment-api-service:
     build:
-      dockerfile: venue-booking/payment/Dockerfile
+      dockerfile: payment/Dockerfile
       context: .
     restart: always
     ports:
